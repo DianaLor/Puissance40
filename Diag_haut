@@ -1,0 +1,102 @@
+def diag_haut(gril,col,lig,j):
+            '''détermine si il y a un alignement en diagonal vers le haut de 4 pions du jour j
+            à partir de la case (col,lig)
+            bien evidement lig doit être compris entre 5 et 3 pour avoir un alignement d'au moins 4 pions'''
+            gril=gril[::-1]
+            lig=5-lig
+            lgauche=[]
+            mdroite=[]
+            m=[]
+            l=[]
+            u=0
+            drapeau=False
+            print(lig,col)
+            print(gril)
+            lgauche.append(gril[lig][col])
+            mdroite.append(gril[lig][col])
+            if gril[lig][col]==j: 
+                if col<3:
+                    if col!=0 and lig!=0:
+                        if lig==2 and col==2:
+                            
+                            mdroite=[gril[lig+i][col+i] for i in range((8-col)-lig)]
+                        else:
+                            mdroite=[gril[lig+i][col+i] for i in range((7-col)-lig)]
+                     
+                        
+                    else:
+                        if col==0:
+                            
+                            mdroite=[gril[lig+i][col+i] for i in range((6-col)-lig)]
+                        else:
+                            
+                            mdroite=[gril[lig+i][col+i] for i in range((7-col)-lig)]
+                if col==3:
+                    lgauche=[gril[lig+i][col-i] for i in range((col+1))]
+                    mdroite=[gril[lig+i][col+i] for i in range((7-col))]
+                if col>3:
+                    if lig<2 and col!=6:
+                        lgauche=[gril[lig+i][col-i] for i in range((col))]
+                    elif col==6 and lig!=2:
+                        lgauche=[gril[lig+i][col-i] for i in range((col-lig))]
+                    elif col<6 and lig==2:
+                        lgauche=[gril[lig+i][col-i] for i in range((col-lig+(6-col)))]
+                    elif col==6 and lig==2:
+                        lgauche=[gril[lig+i][col-i] for i in range((4))]
+            
+                print(lgauche)
+                print(mdroite)
+                if j==1:
+                    u=2
+                else:
+                    u=1
+                if col<3:
+                    for i in range(4):
+                        m.append(mdroite[i])
+                    if 0 not in m and u not in m and drapeau==False:
+                        drapeau=True   
+                elif col>3:
+                    for i in range(4):
+                        l.append(lgauche[i])
+                    if 0 not in l and u not in l and drapeau==False:
+                        drapeau=True   
+                else:
+                    for i in range(4):
+                        m.append(mdroite[i])
+                        l.append(lgauche[i])
+                    if 0 not in m and u not in m and drapeau==False:
+                        drapeau=True                     
+                    if 0 not in l and u not in l and drapeau==False:
+                        drapeau=True
+                    
+                return drapeau
+        
+assert diag_haut([[0,2,1,0,1,0,0],
+                 [0,0,0,1,0,0,0],
+                 [0,0,1,2,1,0,2],
+                 [0,1,2,1,2,2,0],
+                 [0,2,1,0,0,1,0],
+                 [2,1,1,2,1,1,0]],0,5,2)==True
+
+assert diag_haut([[0,2,1,1,1,0,0],
+                 [0,0,0,1,1,0,0],
+                 [0,0,1,2,1,1,2],
+                 [0,1,0,1,2,2,1],
+                 [0,2,1,0,0,1,0],
+                 [2,1,1,2,1,1,0]],6,3,1)==True
+
+assert diag_haut([[0,2,1,0,1,0,0],
+                 [0,0,0,1,0,1,0],
+                 [0,0,1,2,1,0,2],
+                 [0,1,0,1,2,2,0],
+                 [0,2,1,0,0,1,0],
+                 [2,1,1,2,1,1,0]],2,4,1)==True
+
+assert diag_haut([[0,2,1,0,1,0,0],
+                 [0,0,0,1,0,0,0],
+                 [0,0,1,2,1,0,2],
+                 [0,1,0,1,2,2,0],
+                 [0,2,1,0,0,1,0],
+                 [2,1,1,2,1,1,0]],2,4,1)==False
+
+
