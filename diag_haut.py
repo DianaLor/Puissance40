@@ -6,12 +6,12 @@ def diag_haut(gril,j,lig,col):
     fin=[]
     fin2=[]
     for i in range (6):
-        if gril[x1][y1]==j:
+        if gril[x1][y1]==j and x1<=5 and y1<6:
             fin.append(gril[x1][y1])
             x1 -= 1
             y1 += 1
     for i in range (6):
-        if gril[x2][y2]==j:
+        if gril[x2][y2]==j and x2<=5 and y2<=6:
             fin2.append(gril[x2][y2])
             x2 -= 1
             y2 -= 1
