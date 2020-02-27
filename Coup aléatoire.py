@@ -1,8 +1,6 @@
 from random import *
-def grille():
-    return [[0,0,0,0,0,0] for i in range(6)]
-
 def coup_aléatoire(grille,j):
+    '''Joue un coup aléatoire pour le joueur j, la grille non plein.'''
     m=[]
     h=[]
     for i in grille:
