@@ -1,4 +1,6 @@
 def vert(gril,j,col,lig) :
+    '''Détermine si il a un alignement vertical de 4 pions du joueur j
+    à partir de la case (lig,col)'''
     m03=[]
     m14=[]
     m25=[]
