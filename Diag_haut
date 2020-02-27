@@ -10,8 +10,6 @@ def diag_haut(gril,col,lig,j):
             l=[]
             u=0
             drapeau=False
-            print(lig,col)
-            print(gril)
             lgauche.append(gril[lig][col])
             mdroite.append(gril[lig][col])
             if gril[lig][col]==j: 
@@ -44,8 +42,6 @@ def diag_haut(gril,col,lig,j):
                     elif col==6 and lig==2:
                         lgauche=[gril[lig+i][col-i] for i in range((4))]
             
-                print(lgauche)
-                print(mdroite)
                 if j==1:
                     u=2
                 else:
