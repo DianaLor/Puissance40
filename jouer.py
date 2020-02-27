@@ -1,4 +1,5 @@
 def jouer(gril,j,col):
+    '''Fonction qui joue un coup du joueur j dans la colonne col de la grille'''
     m=[i[col] for i in gril]
     ligne=0
     drapeau=True
