@@ -1,4 +1,5 @@
 def victoire(gril,j):
+    n=0
     for lig in range(6):
         for col in range(7):
             if horiz(gril, j, lig, col) == True or vert(gril, j, lig, col) == True or diag_haut(gril, j, lig, col) ==True or diag_bas(gril, j, lig, col)==True:
