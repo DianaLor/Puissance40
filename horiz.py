@@ -1,7 +1,7 @@
   
 def horiz(gril,lig,col,j):
     '''Détermine si il a un alignement horizontal de 4 pions du joueur j
-    à partir de la case (lig,col)'''
+    où la case (lig,col) appartiendrais '''
     m03=[]
     m25=[]
     m14=[]
