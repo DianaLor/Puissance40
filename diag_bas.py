@@ -1,109 +1,50 @@
-def diag_bas(gril,col,lig,j):
-            '''détermine si il y a un alignement en diagonal vers le bas de 4 pions du jour j
-            à partir de la case (col,lig)
-            bien evidement lig doit être compris entre 0 et 2 pour avoir un alignement d'au moins 4 pions'''
-            lgauche=[]
-            mdroite=[]
-            m=[]
-            l=[]
-            u=0
-            drapeau=False
-            
-            lgauche.append(gril[lig][col])
-            mdroite.append(gril[lig][col])
-            if gril[lig][col]==j: 
-                if col<3:
-                    if col!=0 and lig!=0:
-                        if lig==2 and col==2:
-                            
-                            mdroite=[gril[lig+i][col+i] for i in range((8-col)-lig)]
-                        else:
-                            mdroite=[gril[lig+i][col+i] for i in range((7-col)-lig)]
-                     
-                        
-                    else:
-                        if col==0:
-                            
-                            mdroite=[gril[lig+i][col+i] for i in range((6-col)-lig)]
-                        else:
-                            
-                            mdroite=[gril[lig+i][col+i] for i in range((7-col)-lig)]
-                if col==3:
-                    lgauche=[gril[lig+i][col-i] for i in range((col+1))]
-                    mdroite=[gril[lig+i][col+i] for i in range((7-col))]
-                if col>3:
-                    if lig<2 and col!=6:
-                        lgauche=[gril[lig+i][col-i] for i in range((col))]
-                    elif col==6 and lig!=2:
-                        lgauche=[gril[lig+i][col-i] for i in range((col-lig))]
-                    elif col<6 and lig==2:
-                        lgauche=[gril[lig+i][col-i] for i in range((col-lig+(6-col)))]
-                    elif col==6 and lig==2:
-                        lgauche=[gril[lig+i][col-i] for i in range((4))]
-            
-               
-                if j==1:
-                    u=2
-                else:
-                    u=1
-                if col<3:
-                    for i in range(4):
-                        m.append(mdroite[i])
-                    if 0 not in m and u not in m and drapeau==False:
-                        drapeau=True   
-                elif col>3:
-                    for i in range(4):
-                        l.append(lgauche[i])
-                    if 0 not in l and u not in l and drapeau==False:
-                        drapeau=True   
-                else:
-                    for i in range(4):
-                        m.append(mdroite[i])
-                        l.append(lgauche[i])
-                    if 0 not in m and u not in m and drapeau==False:
-                        drapeau=True                     
-                    if 0 not in l and u not in l and drapeau==False:
-                        drapeau=True
-                return drapeau
+def diag_haut(gril,col,lig,j):  
+    x1=lig
+    y1=col
+    x2=lig
+    y2=col
+    fin=[]
+    fin2=[]
+    for i in range (6):
+        if x1<=5 and y1<=6 and gril[x1][y1]==j: 
+                fin.append(gril[x1][y1])
+                x1 -= 1
+                y1 += 1
+    for i in range (6):
+        if x2<=5 and y2<=6:
+            if gril[x2][y2]==j:
+                fin2.append(gril[x2][y2])
+                x2 -= 1
+                y2 -= 1
+    if len(fin) >= 4 or len(fin2)>= 4 :
+        return True
+    else :
+        return False
         
-
-
-
-
-assert diag_bas([[0,0,0,0,1,0,0],
-                 [0,0,1,0,0,0,0],
-                 [0,0,1,0,1,0,0],
-                 [0,1,0,1,1,0,0],
-                 [0,2,1,0,1,0,0],
-                 [0,1,1,0,1,0,0]],4,2,1)==True
-
-assert diag_bas([[0,2,0,0,1,0,0],
-                 [0,0,2,0,0,0,0],
-                 [0,0,1,2,1,0,0],
-                 [0,1,0,1,2,0,0],
-                 [0,2,1,0,1,1,0],
-                 [0,1,1,0,1,0,0]],1,0,2)==True
-
-assert diag_bas([[0,2,0,0,1,0,0],
-                 [0,0,0,0,0,0,0],
-                 [0,0,1,2,1,0,0],
-                 [0,1,0,1,2,0,0],
-                 [0,2,1,0,1,1,0],
-                 [0,1,1,0,1,0,0]],1,0,2)==False 
-
-assert diag_bas([[0,2,0,0,1,0,0],
-                 [0,0,0,0,0,0,0],
-                 [0,0,1,2,1,0,0],
-                 [0,1,2,1,2,0,0],
-                 [0,2,1,0,1,1,0],
-                 [2,1,1,0,1,0,0]],3,2,2)==True 
-
-
-
-assert diag_bas([[0,2,1,0,1,0,0],
+assert diag_haut([[0,2,1,0,1,0,0],
                  [0,0,0,1,0,0,0],
                  [0,0,1,2,1,0,2],
                  [0,1,2,1,2,2,0],
-                 [0,2,1,0,2,1,0],
-                 [2,1,1,2,1,0,0]],6,2,2)==True 
+                 [0,2,1,0,0,1,0],
+                 [2,1,1,2,1,1,0]],0,5,2)==True
 
+assert diag_haut([[0,2,1,1,1,0,0],
+                 [0,0,0,1,1,0,0],
+                 [0,0,1,2,1,1,2],
+                 [0,1,0,1,2,2,1],
+                 [0,2,1,0,0,1,0],
+                 [2,1,1,2,1,1,0]],6,3,1)==True
+
+assert diag_haut([[0,2,1,0,1,0,0],
+                 [0,0,0,1,0,1,0],
+                 [0,0,1,2,1,0,2],
+                 [0,1,0,1,2,2,0],
+                 [0,2,1,0,0,1,0],
+                 [2,1,1,2,1,1,0]],2,4,1)==True
+
+assert diag_haut([[0,2,1,0,1,0,0],
+                 [0,0,0,1,0,0,0],
+                 [0,0,1,2,1,0,2],
+                 [0,1,0,1,2,2,0],
+                 [0,2,1,0,0,1,0],
+                 [2,1,1,2,1,1,0]],2,4,1)==False
