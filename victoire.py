@@ -5,9 +5,9 @@ def victoire(gril,j):
                 return True
             if vert(gril,j,y,x)==True:
                 return True
-            if diag_haut(gril,j,x,y)==True:
+            if diag_haut(gril,j,y,x)==True:
                 return True
-            if diag_bas(gril,j,x,y)==True:
+            if diag_bas(gril,j,y,x)==True:
                 return True
     return False
 
